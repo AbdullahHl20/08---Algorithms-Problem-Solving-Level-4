@@ -92,10 +92,10 @@ int NumberOfSecondsInAYear(short Year)
 
 short ReadMonth()
 {
-	short Year;
-	cout << "\nPlease enter a Month to check? ";
-	cin >> Year;
-	return Year;
+	short Month;
+	cout << "\n Please enter a Month to check? ";
+	cin >> Month;
+	return Month;
 }
 
 short NumberOfDaysInAMonth(short Month, short Year) {
@@ -135,10 +135,10 @@ int NumberOfSecondsInAMonth(short Month, short Year)
 #pragma endregion
 
 #pragma region DayName
-short ReaDay()
+short ReadDay()
 {
 	short Year;
-	cout << "\nPlease enter a Day to check? ";
+	cout << "\n Please enter a Day to check? ";
 	cin >> Year;
 	return Year;
 }
@@ -237,8 +237,10 @@ void PrintAllMonth(short Year)
 	return;
 }
 
-short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year) {
-	short TotalDays = 0; for (int i = 1; i <= Month - 1; i++)
+short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
+{
+	short TotalDays = 0;
+	for (int i = 1; i <= Month - 1; i++)
 	{
 		TotalDays += NumberOfDaysInAMonth(i, Year);
 	}
@@ -247,7 +249,7 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year) {
 }
 #pragma endregion Calendar
 
-#pragma  region ProblemsFrom#11to#20
+#pragma  region ProblemsFrom11to20
 
 struct sDate { short Year; short Month; short Day; };
 
@@ -275,33 +277,80 @@ sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
 			break;
 		}
 	}
+	return Date;
+}
 
-#pragma endregion ProblemsFrom#11to#20
+sDate ReadFullDate() {
+	sDate Date;
+	Date.Day = ReadDay();
+	Date.Month = ReadMonth();
+	Date.Year = ReadYear();
+	return Date;
+}
 
-	int main()
-	{
-		std::cout << "Hello World!\n";
+bool IsDate1BeforeDate2(sDate Date1, sDate Date2) 
+{
+	return  (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+}
+
+bool IsDate1EqualDate2(sDate Date1, sDate Date2) 
+{
+	return  (Date1.Year == Date2.Year) ? ((Date1.Month == Date2.Month) ? ((Date1.Day == Date2.Day) ? true : false) : false) : false;
+}
+
+bool IsLastDay(sDate Date1)
+{
+	short numberOfda = NumberOfDaysInAMonth(Date1.Month, Date1.Year);
+	return  Date1.Day== numberOfda;
+}
+
+bool IsLastMonth(sDate Date1)
+{
+	return  Date1.Month == 12 ? true: false;
+}
+#pragma endregion ProblemsFrom11to20
+
+int main()
+{
+	std::cout << "Hello World!\n";
 
 
-		int year = ReadYear();
-		int Month = ReadMonth();
-		int Day = ReaDay();
+	//int year = ReadYear();
+	//int Month = ReadMonth();
+	//int Day = ReadDay();
 
-		cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
-		//cout << GetDayName(Number);
-		//PrintAllMonth(year);
-		//GetDeitles(year, Month, Day);
-		system("pause>0");
-		return 0;
-	}
+	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
+	//cout << GetDayName(Number);
+	//PrintAllMonth(year);
+	//GetDeitles(year, Month, Day);
 
-	// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-	// Debug program: F5 or Debug > Start Debugging menu
+	sDate Date1 = ReadFullDate();
+	if (IsLastDay(Date1))
+		cout << "\n Yes Is last day";
+	else
+		cout << "\n no Is not last day";
 
-	// Tips for Getting Started: 
-	//   1. Use the Solution Explorer window to add/manage files
-	//   2. Use the Team Explorer window to connect to source control
-	//   3. Use the Output window to see build output and other messages
-	//   4. Use the Error List window to view errors
-	//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-	//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	if (IsLastMonth(Date1))
+		cout << "\n Yes Is last Month";
+	else
+		cout << "\n no Is not last Month";
+	/*sDate Date2 = ReadFullDate();
+	if (IsDate1BeforeDate2(Date1, Date2))
+		cout << "\nYes, Date1 is Less than Date2.";
+	else
+		cout << "\nNo, Date1 is NOT Less than Date2.";*/
+
+	system("pause>0");
+	return 0;
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
