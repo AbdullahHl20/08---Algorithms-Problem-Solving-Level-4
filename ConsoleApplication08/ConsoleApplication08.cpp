@@ -332,19 +332,38 @@ sDate IncreaseDateByOneDay(sDate Date)
 	return Date;
 }
 
+void  SwapDates(sDate& Date1, sDate& Date2)
+{
+	sDate TempDate;
+	TempDate.Year = Date1.Year;
+	TempDate.Month = Date1.Month;
+	TempDate.Day = Date1.Day;
+	Date1.Year = Date2.Year;
+	Date1.Month = Date2.Month;
+	Date1.Day = Date2.Day;
+	Date2.Year = TempDate.Year;
+	Date2.Month = TempDate.Month;
+	Date2.Day = TempDate.Day;
+}
+
 int GetDifferenceInDays(sDate Date1, sDate Date2, bool IncludeEndDay = false)
 {
-	int Days = 0;
+	int Days = 0; short SawpFlagValue = 1;
+	if (!IsDate1BeforeDate2(Date1, Date2)) {
+		//Swap Dates     
+		SwapDates(Date1, Date2);
+		SawpFlagValue = -1;
+	}
 	while (IsDate1BeforeDate2(Date1, Date2))
 	{
 		Days++; Date1 = IncreaseDateByOneDay(Date1);
-	}
-	return IncludeEndDay ? ++Days : Days;
+	} 
+	return IncludeEndDay ? ++Days * SawpFlagValue : Days * SawpFlagValue;
 }
 
 sDate GetSystemDate()
 {
-	sDate Date; 
+	sDate Date;
 	time_t t = time(0);
 	tm* now = localtime(&t);
 	Date.Year = now->tm_year + 1900;
@@ -352,6 +371,9 @@ sDate GetSystemDate()
 	Date.Day = now->tm_mday;
 	return Date;
 }
+
+
+
 #pragma endregion ProblemsFrom11to20
 
 int main()
