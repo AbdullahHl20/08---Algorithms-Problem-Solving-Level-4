@@ -308,6 +308,29 @@ bool IsLastMonth(sDate Date1)
 {
 	return  Date1.Month == 12 ? true: false;
 }
+
+sDate IncreaseDateByOneDay(sDate Date)
+{
+	if (IsLastDay(Date))
+	{
+		if (IsLastMonth(Date))
+		{
+			Date.Month = 1;
+			Date.Day = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+	return Date;
+}
 #pragma endregion ProblemsFrom11to20
 
 int main()
@@ -315,16 +338,16 @@ int main()
 	std::cout << "Hello World!\n";
 
 
-	//int year = ReadYear();
+	int year = ReadYear();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
 
 	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
 	//cout << GetDayName(Number);
-	//PrintAllMonth(year);
+	PrintAllMonth(year);
 	//GetDeitles(year, Month, Day);
 
-	sDate Date1 = ReadFullDate();
+	/*sDate Date1 = ReadFullDate();
 	if (IsLastDay(Date1))
 		cout << "\n Yes Is last day";
 	else
@@ -333,7 +356,7 @@ int main()
 	if (IsLastMonth(Date1))
 		cout << "\n Yes Is last Month";
 	else
-		cout << "\n no Is not last Month";
+		cout << "\n no Is not last Month";*/
 	/*sDate Date2 = ReadFullDate();
 	if (IsDate1BeforeDate2(Date1, Date2))
 		cout << "\nYes, Date1 is Less than Date2.";
