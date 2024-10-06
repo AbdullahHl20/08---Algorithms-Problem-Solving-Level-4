@@ -1,6 +1,6 @@
 // ConsoleApplication08.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+#pragma warning(disable : 4996)
 #include <iostream>
 #include <string>
 using namespace std;
@@ -334,12 +334,23 @@ sDate IncreaseDateByOneDay(sDate Date)
 
 int GetDifferenceInDays(sDate Date1, sDate Date2, bool IncludeEndDay = false)
 {
-	int Days = 0; 
+	int Days = 0;
 	while (IsDate1BeforeDate2(Date1, Date2))
 	{
 		Days++; Date1 = IncreaseDateByOneDay(Date1);
 	}
 	return IncludeEndDay ? ++Days : Days;
+}
+
+sDate GetSystemDate()
+{
+	sDate Date; 
+	time_t t = time(0);
+	tm* now = localtime(&t);
+	Date.Year = now->tm_year + 1900;
+	Date.Month = now->tm_mon + 1;
+	Date.Day = now->tm_mday;
+	return Date;
 }
 #pragma endregion ProblemsFrom11to20
 
@@ -349,7 +360,7 @@ int main()
 
 
 	sDate date1 = ReadFullDate();
-	sDate date2 = ReadFullDate();
+	sDate date2 = GetSystemDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
 
@@ -358,7 +369,7 @@ int main()
 	//PrintAllMonth(year);
 	//GetDeitles(year, Month, Day);
 
-	cout << to_string(DiffBetweendate(date1, date2));
+	cout << to_string(GetDifferenceInDays(date1, date2));
 	/*sDate Date1 = ReadFullDate();
 	if (IsLastDay(Date1))
 		cout << "\n Yes Is last day";
