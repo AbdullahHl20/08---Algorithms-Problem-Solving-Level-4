@@ -288,12 +288,12 @@ sDate ReadFullDate() {
 	return Date;
 }
 
-bool IsDate1BeforeDate2(sDate Date1, sDate Date2) 
+bool IsDate1BeforeDate2(sDate Date1, sDate Date2)
 {
 	return  (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
 }
 
-bool IsDate1EqualDate2(sDate Date1, sDate Date2) 
+bool IsDate1EqualDate2(sDate Date1, sDate Date2)
 {
 	return  (Date1.Year == Date2.Year) ? ((Date1.Month == Date2.Month) ? ((Date1.Day == Date2.Day) ? true : false) : false) : false;
 }
@@ -301,12 +301,12 @@ bool IsDate1EqualDate2(sDate Date1, sDate Date2)
 bool IsLastDay(sDate Date1)
 {
 	short numberOfda = NumberOfDaysInAMonth(Date1.Month, Date1.Year);
-	return  Date1.Day== numberOfda;
+	return  Date1.Day == numberOfda;
 }
 
 bool IsLastMonth(sDate Date1)
 {
-	return  Date1.Month == 12 ? true: false;
+	return  Date1.Month == 12 ? true : false;
 }
 
 sDate IncreaseDateByOneDay(sDate Date)
@@ -331,6 +331,16 @@ sDate IncreaseDateByOneDay(sDate Date)
 	}
 	return Date;
 }
+
+int GetDifferenceInDays(sDate Date1, sDate Date2, bool IncludeEndDay = false)
+{
+	int Days = 0; 
+	while (IsDate1BeforeDate2(Date1, Date2))
+	{
+		Days++; Date1 = IncreaseDateByOneDay(Date1);
+	}
+	return IncludeEndDay ? ++Days : Days;
+}
 #pragma endregion ProblemsFrom11to20
 
 int main()
@@ -338,15 +348,17 @@ int main()
 	std::cout << "Hello World!\n";
 
 
-	int year = ReadYear();
+	sDate date1 = ReadFullDate();
+	sDate date2 = ReadFullDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
 
 	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
 	//cout << GetDayName(Number);
-	PrintAllMonth(year);
+	//PrintAllMonth(year);
 	//GetDeitles(year, Month, Day);
 
+	cout << to_string(DiffBetweendate(date1, date2));
 	/*sDate Date1 = ReadFullDate();
 	if (IsLastDay(Date1))
 		cout << "\n Yes Is last day";
@@ -357,11 +369,11 @@ int main()
 		cout << "\n Yes Is last Month";
 	else
 		cout << "\n no Is not last Month";*/
-	/*sDate Date2 = ReadFullDate();
-	if (IsDate1BeforeDate2(Date1, Date2))
-		cout << "\nYes, Date1 is Less than Date2.";
-	else
-		cout << "\nNo, Date1 is NOT Less than Date2.";*/
+		/*sDate Date2 = ReadFullDate();
+		if (IsDate1BeforeDate2(Date1, Date2))
+			cout << "\nYes, Date1 is Less than Date2.";
+		else
+			cout << "\nNo, Date1 is NOT Less than Date2.";*/
 
 	system("pause>0");
 	return 0;
