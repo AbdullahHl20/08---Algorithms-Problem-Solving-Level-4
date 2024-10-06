@@ -357,7 +357,7 @@ int GetDifferenceInDays(sDate Date1, sDate Date2, bool IncludeEndDay = false)
 	while (IsDate1BeforeDate2(Date1, Date2))
 	{
 		Days++; Date1 = IncreaseDateByOneDay(Date1);
-	} 
+	}
 	return IncludeEndDay ? ++Days * SawpFlagValue : Days * SawpFlagValue;
 }
 
@@ -372,7 +372,37 @@ sDate GetSystemDate()
 	return Date;
 }
 
+sDate IncreaseDateByOneWeek(sDate Date)
+{
+	for (int i = 1; i <= 7; i++)
+	{
+		Date = IncreaseDateByOneDay(Date);
+	}
+	return Date;
+}
+sDate IncreaseDateByOneMonth(sDate Date) {
+	if (Date.Month == 12) { Date.Month = 1; Date.Year++; }
+	else { Date.Month++; } //last check day in date should not exceed max days in the current month// example if date is 31/1/2022 increasing one month should not be 31/2/2022, it should// be 28/2/2022
+	short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Month, Date.Year);
+	if (Date.Day > NumberOfDaysInCurrentMonth)
+	{
+		Date.Day = NumberOfDaysInCurrentMonth;
+	} return Date;
+}
+sDate IncreaseDateByXDays(short Days, sDate Date)
+{
+	for (short i = 1; i <= Days; i++) { Date = IncreaseDateByOneDay(Date); } return Date;
+}
+sDate IncreaseDateByXMonths(short Months, sDate Date
+)
+{
+	for (short i = 1; i <= Months; i++)
 
+	{
+		Date = IncreaseDateByOneMonth(Date);
+	}
+	return Date;
+}
 
 #pragma endregion ProblemsFrom11to20
 
