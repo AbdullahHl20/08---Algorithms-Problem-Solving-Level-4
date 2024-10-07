@@ -251,12 +251,12 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 
 #pragma  region ProblemsFrom11to20
 
-struct sDate { short Year; short Month; short Day; };
+struct stDate { short Year; short Month; short Day; };
 
 
-sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
+stDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
 {
-	sDate Date;
+	stDate Date;
 
 	short RemainingDays = DateOrderInYear;
 
@@ -280,36 +280,36 @@ sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
 	return Date;
 }
 
-sDate ReadFullDate() {
-	sDate Date;
+stDate ReadFullDate() {
+	stDate Date;
 	Date.Day = ReadDay();
 	Date.Month = ReadMonth();
 	Date.Year = ReadYear();
 	return Date;
 }
 
-bool IsDate1BeforeDate2(sDate Date1, sDate Date2)
+bool IstDate1BeforeDate2(stDate Date1, stDate Date2)
 {
 	return  (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
 }
 
-bool IsDate1EqualDate2(sDate Date1, sDate Date2)
+bool IstDate1EqualDate2(stDate Date1, stDate Date2)
 {
 	return  (Date1.Year == Date2.Year) ? ((Date1.Month == Date2.Month) ? ((Date1.Day == Date2.Day) ? true : false) : false) : false;
 }
 
-bool IsLastDay(sDate Date1)
+bool IsLastDay(stDate Date1)
 {
 	short numberOfda = NumberOfDaysInAMonth(Date1.Month, Date1.Year);
 	return  Date1.Day == numberOfda;
 }
 
-bool IsLastMonth(sDate Date1)
+bool IsLastMonth(stDate Date1)
 {
 	return  Date1.Month == 12 ? true : false;
 }
 
-sDate IncreaseDateByOneDay(sDate Date)
+stDate IncreaseDateByOneDay(stDate Date)
 {
 	if (IsLastDay(Date))
 	{
@@ -332,9 +332,9 @@ sDate IncreaseDateByOneDay(sDate Date)
 	return Date;
 }
 
-void  SwapDates(sDate& Date1, sDate& Date2)
+void  SwapDates(stDate& Date1, stDate& Date2)
 {
-	sDate TempDate;
+	stDate TempDate;
 	TempDate.Year = Date1.Year;
 	TempDate.Month = Date1.Month;
 	TempDate.Day = Date1.Day;
@@ -346,24 +346,24 @@ void  SwapDates(sDate& Date1, sDate& Date2)
 	Date2.Day = TempDate.Day;
 }
 
-int GetDifferenceInDays(sDate Date1, sDate Date2, bool IncludeEndDay = false)
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 {
 	int Days = 0; short SawpFlagValue = 1;
-	if (!IsDate1BeforeDate2(Date1, Date2)) {
+	if (!IstDate1BeforeDate2(Date1, Date2)) {
 		//Swap Dates     
 		SwapDates(Date1, Date2);
 		SawpFlagValue = -1;
 	}
-	while (IsDate1BeforeDate2(Date1, Date2))
+	while (IstDate1BeforeDate2(Date1, Date2))
 	{
 		Days++; Date1 = IncreaseDateByOneDay(Date1);
 	}
 	return IncludeEndDay ? ++Days * SawpFlagValue : Days * SawpFlagValue;
 }
 
-sDate GetSystemDate()
+stDate GetSystemDate()
 {
-	sDate Date;
+	stDate Date;
 	time_t t = time(0);
 	tm* now = localtime(&t);
 	Date.Year = now->tm_year + 1900;
@@ -372,7 +372,7 @@ sDate GetSystemDate()
 	return Date;
 }
 
-sDate IncreaseDateByOneWeek(sDate Date)
+stDate IncreaseDateByOneWeek(stDate Date)
 {
 	for (int i = 1; i <= 7; i++)
 	{
@@ -381,7 +381,7 @@ sDate IncreaseDateByOneWeek(sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByOneMonth(sDate Date)
+stDate IncreaseDateByOneMonth(stDate Date)
 {
 	if (Date.Month == 12)
 	{
@@ -400,7 +400,7 @@ sDate IncreaseDateByOneMonth(sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByXDays(short Days, sDate Date)
+stDate IncreaseDateByXDays(short Days, stDate Date)
 {
 	for (short i = 1; i <= Days; i++)
 	{
@@ -409,7 +409,7 @@ sDate IncreaseDateByXDays(short Days, sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByXMonths(short Months, sDate Date)
+stDate IncreaseDateByXMonths(short Months, stDate Date)
 {
 	for (short i = 1; i <= Months; i++)
 	{
@@ -418,7 +418,7 @@ sDate IncreaseDateByXMonths(short Months, sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByXDays(short Days, sDate Date)
+stDate IncreaseDateByXDays(short Days, stDate Date)
 {
 	for (short i = 1; i <= Days; i++)
 	{
@@ -427,7 +427,7 @@ sDate IncreaseDateByXDays(short Days, sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByXMonths(short Months, sDate Date)
+stDate IncreaseDateByXMonths(short Months, stDate Date)
 {
 	for (short i = 1; i <= Months; i++)
 	{
@@ -436,13 +436,13 @@ sDate IncreaseDateByXMonths(short Months, sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByOneYear(sDate Date)
+stDate IncreaseDateByOneYear(stDate Date)
 {
 	Date.Year++;
 	return Date;
 }
 
-sDate IncreaseDateByXYears(short Years, sDate Date)
+stDate IncreaseDateByXYears(short Years, stDate Date)
 {
 	for (short i = 1; i <= Years; i++)
 	{
@@ -451,19 +451,19 @@ sDate IncreaseDateByXYears(short Years, sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByXYearsFaster(short Years, sDate Date)
+stDate IncreaseDateByXYearsFaster(short Years, stDate Date)
 {
 	Date.Year += Years;
 	return Date;
 }
 
-sDate IncreaseDateByOneDecade(sDate Date)
+stDate IncreaseDateByOneDecade(stDate Date)
 {
 	//Period of 10years 
 	Date.Year += 10; return Date;
 }
 
-sDate IncreaseDateByXDecades(short Decade, sDate Date)
+stDate IncreaseDateByXDecades(short Decade, stDate Date)
 {
 	for (short i = 1; i <= Decade * 10; i++)
 	{
@@ -472,24 +472,67 @@ sDate IncreaseDateByXDecades(short Decade, sDate Date)
 	return Date;
 }
 
-sDate IncreaseDateByXDecadesFaster(short Decade, sDate Date)
+stDate IncreaseDateByXDecadesFaster(short Decade, stDate Date)
 {
 	Date.Year += Decade * 10;
 	return Date;
 }
 
-sDate IncreaseDateByOneCentury(sDate Date)
-{ 
+stDate IncreaseDateByOneCentury(stDate Date)
+{
 	//Period of 100 years
-	Date.Year += 100; 
+	Date.Year += 100;
 	return Date;
 }
 
-sDate IncreaseDateByOneMillennium(sDate Date)
+stDate IncreaseDateByOneMillennium(stDate Date)
 {
 	//Period of 1000 years
 	Date.Year += 1000; return Date;
 }
+
+
+stDate DecreaseDateByOneDay(stDate Date)
+{
+	if (Date.Day == 1)
+	{
+		if (Date.Month == 1)
+		{
+			Date.Month = 12; Date.Day = 31; Date.Year--;
+		}
+		else
+		{
+			Date.Month--;
+			Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		}
+	}
+	else {
+		Date.Day--;
+	} return Date;
+}
+
+stDate DecreaseDateByOneWeek(stDate Date)
+{
+	for (int i = 1; i <= 7; i++)
+	{
+		Date = DecreaseDateByOneDay(Date);
+	} return Date;
+}
+
+stDate DecreaseDateByXWeeks(short Weeks, stDate Date)
+{
+	for (short i = 1; i <= Weeks; i++)
+	{
+		Date = DecreaseDateByOneWeek(Date);
+	}
+	return Date;
+}
+
+
+
+stDate DecreaseDateByOneMonth(stDate Date) {
+	if (Date.Month == 1) { Date.Month = 12; Date.Year--; } else Date.Month--; //last check day in date should not exceed max days in the current month// example if date is 31/3/2022 decreasing one month should not be 31/2/2022, it should// be 28/2/2022short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Month, Date.Year); if (Date.Day > NumberOfDaysInCurrentMonth)     { Date.Day = NumberOfDaysInCurrentMonth;     } returnDate; } stDate DecreaseDateByXDays(shortDays, stDateDate) { for (short i = 1; i <= Days; i++)     { Date = DecreaseDateByOneDay(Date);     } returnDate; } stDate DecreaseDateByXMonths(shortMonths, stDateDate) { for (short i = 1; i <= Months; i++)     { Date = DecreaseDateByOneMonth(Date);     } returnDate; } 
+
 
 #pragma endregion ProblemsFrom11to20
 
@@ -498,8 +541,8 @@ int main()
 	std::cout << "Hello World!\n";
 
 
-	sDate date1 = ReadFullDate();
-	sDate date2 = GetSystemDate();
+	stDate date1 = ReadFullDate();
+	stDate date2 = GetSystemDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
 
@@ -509,7 +552,7 @@ int main()
 	//GetDeitles(year, Month, Day);
 
 	cout << to_string(GetDifferenceInDays(date1, date2));
-	/*sDate Date1 = ReadFullDate();
+	/*stDate Date1 = ReadFullDate();
 	if (IsLastDay(Date1))
 		cout << "\n Yes Is last day";
 	else
@@ -519,8 +562,8 @@ int main()
 		cout << "\n Yes Is last Month";
 	else
 		cout << "\n no Is not last Month";*/
-		/*sDate Date2 = ReadFullDate();
-		if (IsDate1BeforeDate2(Date1, Date2))
+		/*stDate Date2 = ReadFullDate();
+		if (IstDate1BeforeDate2(Date1, Date2))
 			cout << "\nYes, Date1 is Less than Date2.";
 		else
 			cout << "\nNo, Date1 is NOT Less than Date2.";*/
