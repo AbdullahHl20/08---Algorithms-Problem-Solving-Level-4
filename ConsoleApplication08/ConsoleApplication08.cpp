@@ -380,28 +380,115 @@ sDate IncreaseDateByOneWeek(sDate Date)
 	}
 	return Date;
 }
-sDate IncreaseDateByOneMonth(sDate Date) {
-	if (Date.Month == 12) { Date.Month = 1; Date.Year++; }
-	else { Date.Month++; } //last check day in date should not exceed max days in the current month// example if date is 31/1/2022 increasing one month should not be 31/2/2022, it should// be 28/2/2022
+
+sDate IncreaseDateByOneMonth(sDate Date)
+{
+	if (Date.Month == 12)
+	{
+		Date.Month = 1;
+		Date.Year++;
+	}
+	else
+	{
+		Date.Month++;
+	} //last check day in date should not exceed max days in the current month// example if date is 31/1/2022 increasing one month should not be 31/2/2022, it should// be 28/2/2022
 	short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Month, Date.Year);
 	if (Date.Day > NumberOfDaysInCurrentMonth)
 	{
 		Date.Day = NumberOfDaysInCurrentMonth;
-	} return Date;
+	}
+	return Date;
 }
+
 sDate IncreaseDateByXDays(short Days, sDate Date)
 {
-	for (short i = 1; i <= Days; i++) { Date = IncreaseDateByOneDay(Date); } return Date;
+	for (short i = 1; i <= Days; i++)
+	{
+		Date = IncreaseDateByOneDay(Date);
+	}
+	return Date;
 }
-sDate IncreaseDateByXMonths(short Months, sDate Date
-)
+
+sDate IncreaseDateByXMonths(short Months, sDate Date)
 {
 	for (short i = 1; i <= Months; i++)
-
 	{
 		Date = IncreaseDateByOneMonth(Date);
 	}
 	return Date;
+}
+
+sDate IncreaseDateByXDays(short Days, sDate Date)
+{
+	for (short i = 1; i <= Days; i++)
+	{
+		Date = IncreaseDateByOneDay(Date);
+	}
+	return Date;
+}
+
+sDate IncreaseDateByXMonths(short Months, sDate Date)
+{
+	for (short i = 1; i <= Months; i++)
+	{
+		Date = IncreaseDateByOneMonth(Date);
+	}
+	return Date;
+}
+
+sDate IncreaseDateByOneYear(sDate Date)
+{
+	Date.Year++;
+	return Date;
+}
+
+sDate IncreaseDateByXYears(short Years, sDate Date)
+{
+	for (short i = 1; i <= Years; i++)
+	{
+		Date = IncreaseDateByOneYear(Date);
+	}
+	return Date;
+}
+
+sDate IncreaseDateByXYearsFaster(short Years, sDate Date)
+{
+	Date.Year += Years;
+	return Date;
+}
+
+sDate IncreaseDateByOneDecade(sDate Date)
+{
+	//Period of 10years 
+	Date.Year += 10; return Date;
+}
+
+sDate IncreaseDateByXDecades(short Decade, sDate Date)
+{
+	for (short i = 1; i <= Decade * 10; i++)
+	{
+		Date = IncreaseDateByOneYear(Date);
+	}
+	return Date;
+}
+
+sDate IncreaseDateByXDecadesFaster(short Decade, sDate Date)
+{
+	Date.Year += Decade * 10;
+	return Date;
+}
+
+sDate IncreaseDateByOneCentury(sDate Date)
+{ 
+	//Period of 100 years
+	Date.Year += 100; 
+	return Date;
+}
+
+sDate IncreaseDateByOneMillennium(sDate Date)
+{
+	//Period of 1000 years
+	Date.Year += 1000; return Date;
 }
 
 #pragma endregion ProblemsFrom11to20
