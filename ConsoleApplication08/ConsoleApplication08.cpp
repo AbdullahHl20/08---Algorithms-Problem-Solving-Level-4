@@ -530,9 +530,76 @@ stDate DecreaseDateByXWeeks(short Weeks, stDate Date)
 
 
 
-stDate DecreaseDateByOneMonth(stDate Date) {
-	if (Date.Month == 1) { Date.Month = 12; Date.Year--; } else Date.Month--; //last check day in date should not exceed max days in the current month// example if date is 31/3/2022 decreasing one month should not be 31/2/2022, it should// be 28/2/2022short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Month, Date.Year); if (Date.Day > NumberOfDaysInCurrentMonth)     { Date.Day = NumberOfDaysInCurrentMonth;     } returnDate; } stDate DecreaseDateByXDays(shortDays, stDateDate) { for (short i = 1; i <= Days; i++)     { Date = DecreaseDateByOneDay(Date);     } returnDate; } stDate DecreaseDateByXMonths(shortMonths, stDateDate) { for (short i = 1; i <= Months; i++)     { Date = DecreaseDateByOneMonth(Date);     } returnDate; } 
+stDate DecreaseDateByOneMonth(stDate Date)
+{
+	if (Date.Month == 1) { Date.Month = 12; Date.Year--; }
+	else
+		Date.Month--; //last check day in date should not exceed max days in the current month// example if date is 31/3/2022 decreasing one month should not be 31/2/2022, it should// be 28/2/2022
+	short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Month, Date.Year); if (Date.Day > NumberOfDaysInCurrentMonth)
+	{
+		Date.Day = NumberOfDaysInCurrentMonth;
+	}
+	return Date;
+}
 
+stDate DecreaseDateByXDays(short Days, stDate Date)
+{
+	for (short i = 1; i <= Days; i++)
+	{
+		Date = DecreaseDateByOneDay(Date);
+	} return Date;
+}
+
+stDate DecreaseDateByXMonths(short Months, stDate
+	Date)
+{
+	for (short i = 1; i <= Months; i++)
+	{
+		Date = DecreaseDateByOneMonth(Date);
+	} return Date;
+}
+
+
+stDate DecreaseDateByOneYear(stDate Date) { Date.Year--; return Date; }
+stDate DecreaseDateByXYears(short Years, stDate Date)
+{
+	for (short i = 1; i <= Years; i++)
+	{
+		Date = DecreaseDateByOneYear(Date);
+	}
+	return Date;
+}
+stDate DecreaseDateByXYearsFaster(short Years, stDate Date)
+{
+	Date.Year -= Years; return Date;
+}
+stDate DecreaseDateByOneDecade(stDate Date) {
+	//Period of 10years
+	Date.Year -= 10;
+	return Date;
+}
+stDate DecreaseDateByXDecades(short Decade, stDate Date)
+{
+	for (short i = 1; i <= Decade * 10; i++)
+	{
+		Date = DecreaseDateByOneYear(Date);
+	} return Date;
+}
+stDate DecreaseDateByXDecadesFaster(short Decade, stDate Date)
+{
+	Date.Year -= Decade * 10; return Date;
+}
+
+stDate DecreaseDateByOneCentury(stDate Date)
+{ //Period of 100 years
+	Date.Year -= 100;
+	return Date;
+}
+stDate DecreaseDateByOneMillennium(stDate Date)
+{ //Period of 1000 years
+	Date.Year -= 1000;
+	return Date;
+}
 
 #pragma endregion ProblemsFrom11to20
 
