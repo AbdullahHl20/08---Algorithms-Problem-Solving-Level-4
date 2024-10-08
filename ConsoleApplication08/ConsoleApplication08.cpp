@@ -418,24 +418,6 @@ stDate IncreaseDateByXMonths(short Months, stDate Date)
 	return Date;
 }
 
-stDate IncreaseDateByXDays(short Days, stDate Date)
-{
-	for (short i = 1; i <= Days; i++)
-	{
-		Date = IncreaseDateByOneDay(Date);
-	}
-	return Date;
-}
-
-stDate IncreaseDateByXMonths(short Months, stDate Date)
-{
-	for (short i = 1; i <= Months; i++)
-	{
-		Date = IncreaseDateByOneMonth(Date);
-	}
-	return Date;
-}
-
 stDate IncreaseDateByOneYear(stDate Date)
 {
 	Date.Year++;
@@ -573,7 +555,8 @@ stDate DecreaseDateByXYearsFaster(short Years, stDate Date)
 {
 	Date.Year -= Years; return Date;
 }
-stDate DecreaseDateByOneDecade(stDate Date) {
+stDate DecreaseDateByOneDecade(stDate Date) 
+{
 	//Period of 10years
 	Date.Year -= 10;
 	return Date;
@@ -583,20 +566,25 @@ stDate DecreaseDateByXDecades(short Decade, stDate Date)
 	for (short i = 1; i <= Decade * 10; i++)
 	{
 		Date = DecreaseDateByOneYear(Date);
-	} return Date;
+	} 
+	return Date;
 }
 stDate DecreaseDateByXDecadesFaster(short Decade, stDate Date)
 {
-	Date.Year -= Decade * 10; return Date;
+	Date.Year -= Decade * 10;
+	return Date;
 }
 
 stDate DecreaseDateByOneCentury(stDate Date)
-{ //Period of 100 years
+{ 
+	//Period of 100 years
 	Date.Year -= 100;
 	return Date;
 }
+
 stDate DecreaseDateByOneMillennium(stDate Date)
-{ //Period of 1000 years
+{ 
+	//Period of 1000 years 
 	Date.Year -= 1000;
 	return Date;
 }
