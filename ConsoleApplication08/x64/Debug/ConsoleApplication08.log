@@ -1,2 +1,9 @@
 ﻿  ConsoleApplication08.cpp
-  ConsoleApplication08.vcxproj -> E:\Abdullah\Src\traning\x64\Debug\ConsoleApplication08.exe
+E:\Abdullah\Src\traning\ConsoleApplication08\ConsoleApplication08.cpp(421,8): error C2084: function 'stDate IncreaseDateByXDays(short,stDate)' already has a body
+      E:\Abdullah\Src\traning\ConsoleApplication08\ConsoleApplication08.cpp(403,8):
+      see previous definition of 'IncreaseDateByXDays'
+  
+E:\Abdullah\Src\traning\ConsoleApplication08\ConsoleApplication08.cpp(430,8): error C2084: function 'stDate IncreaseDateByXMonths(short,stDate)' already has a body
+      E:\Abdullah\Src\traning\ConsoleApplication08\ConsoleApplication08.cpp(412,8):
+      see previous definition of 'IncreaseDateByXMonths'
+  

@@ -555,7 +555,7 @@ stDate DecreaseDateByXYearsFaster(short Years, stDate Date)
 {
 	Date.Year -= Years; return Date;
 }
-stDate DecreaseDateByOneDecade(stDate Date) 
+stDate DecreaseDateByOneDecade(stDate Date)
 {
 	//Period of 10years
 	Date.Year -= 10;
@@ -566,7 +566,7 @@ stDate DecreaseDateByXDecades(short Decade, stDate Date)
 	for (short i = 1; i <= Decade * 10; i++)
 	{
 		Date = DecreaseDateByOneYear(Date);
-	} 
+	}
 	return Date;
 }
 stDate DecreaseDateByXDecadesFaster(short Decade, stDate Date)
@@ -576,17 +576,64 @@ stDate DecreaseDateByXDecadesFaster(short Decade, stDate Date)
 }
 
 stDate DecreaseDateByOneCentury(stDate Date)
-{ 
+{
 	//Period of 100 years
 	Date.Year -= 100;
 	return Date;
 }
 
 stDate DecreaseDateByOneMillennium(stDate Date)
-{ 
+{
 	//Period of 1000 years 
 	Date.Year -= 1000;
 	return Date;
+}
+short DayOfWeekOrder(stDate Date)
+{
+	return DayOfWeekOrder(Date.Day, Date.Month, Date.Year);
+}
+
+short IsEndOfWeek(stDate Date)
+{
+	return  DayOfWeekOrder(Date) == 6;
+}
+
+bool IsWeekEnd(stDate Date)
+{ //Weekends are Fri and Sat
+	short DayIndex = DayOfWeekOrder(Date);
+	return  (DayIndex == 5 || DayIndex == 6);
+}
+
+bool IsBusinessDay(stDate Date)
+{ //Weekends are Sun,Mon,Tue,Wed and Thur/* 
+	short DayIndex = DayOfWeekOrder(Date);
+	return  (DayIndex >= 5 && DayIndex <= 4);
+
+	//shorter method is to invert the IsWeekEnd: this will save updating code.
+	//	return !IsWeekEnd(Date); 
+}
+
+short DaysUntilTheEndOfWeek(stDate Date)
+{
+	return 6 - DayOfWeekOrder(Date);
+}
+
+short DaysUntilTheEndOfMonth(stDate Date1)
+{
+	stDate EndOfMontDate;
+	EndOfMontDate.Day = NumberOfDaysInAMonth(Date1.Month, Date1.Year);
+	EndOfMontDate.Month = Date1.Month;
+	EndOfMontDate.Year = Date1.Year;
+	return GetDifferenceInDays(Date1, EndOfMontDate, true);
+}
+
+short DaysUntilTheEndOfYear(stDate Date1)
+{
+	stDate EndOfYearDate;
+	EndOfYearDate.Day = 31;
+	EndOfYearDate.Month = 12;
+	EndOfYearDate.Year = Date1.Year;
+	return GetDifferenceInDays(Date1, EndOfYearDate, true);
 }
 
 #pragma endregion ProblemsFrom11to20
