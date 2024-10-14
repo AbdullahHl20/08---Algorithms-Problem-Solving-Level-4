@@ -703,12 +703,20 @@ enDateCompare CompareDates(stDate Date1, stDate Date2)
 		return enDateCompare::Before;
 	if (IsDate1EqualDate2(Date1, Date2))
 		return enDateCompare::Equal;
-	if (IsDate1AfterDate2(Date1, Date2))
-		return enDateCompare::After;
-	//this is faster
+	/*if (IsDate1AfterDate2(Date1, Date2))
+		return enDateCompare::After;*/
+		//this is faster
 	return enDateCompare::After;
 }
 
+struct stPeriod { stDate StartDate; stDate EndDate; };
+bool IsOverlapPeriods(stPeriod Period1, stPeriod Period2)
+{
+	if (CompareDates(Period2.EndDate, Period1.StartDate) == enDateCompare::Before || CompareDates(Period2.StartDate, Period1.EndDate) == enDateCompare::After)
+		return false;
+	else 
+		return true;
+}
 
 #pragma endregion ProblemsFrom11to20
 
@@ -721,7 +729,7 @@ int main()
 	stDate date2 = ReadFullDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
-	cout << CompareDate(date1, date2);
+	cout << CompareDates(date1, date2);
 	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
 	//cout << GetDayName(Number);
 	//PrintAllMonth(year);
