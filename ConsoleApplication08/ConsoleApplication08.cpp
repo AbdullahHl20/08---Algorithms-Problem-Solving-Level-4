@@ -685,6 +685,16 @@ stDate CalculateVacationReturnDate(stDate DateFrom, short VacationDays)
 	return DateFrom;
 }
 
+bool IsDate1EqualDate2(stDate Date1, stDate Date2)
+{
+	return  (Date1.Year == Date2.Year) ? ((Date1.Month == Date2.Month) ? ((Date1.Day == Date2.Day) ? true : false) : false) : false;
+}
+
+bool IsDate1AfterDate2(stDate Date1, stDate Date2)
+{
+	return (!IsDate1BeforeDate2(Date1, Date2) && !IsDate1EqualDate2(Date1, Date2));
+}
+
 
 #pragma endregion ProblemsFrom11to20
 
