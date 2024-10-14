@@ -606,11 +606,11 @@ bool IsWeekEnd(stDate Date)
 
 bool IsBusinessDay(stDate Date)
 { //Weekends are Sun,Mon,Tue,Wed and Thur/* 
-	short DayIndex = DayOfWeekOrder(Date);
-	return  (DayIndex >= 5 && DayIndex <= 4);
+	/*short DayIndex = DayOfWeekOrder(Date);
+	return  (DayIndex >= 5 && DayIndex <= 4);*/
 
 	//shorter method is to invert the IsWeekEnd: this will save updating code.
-	//	return !IsWeekEnd(Date); 
+	return !IsWeekEnd(Date);
 }
 
 short DaysUntilTheEndOfWeek(stDate Date)
@@ -635,6 +635,23 @@ short DaysUntilTheEndOfYear(stDate Date1)
 	EndOfYearDate.Year = Date1.Year;
 	return GetDifferenceInDays(Date1, EndOfYearDate, true);
 }
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+	return  (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+}
+
+short CalculateVacationDays(stDate DateFrom, stDate DateTo)
+{
+	short DaysCount = 0;
+	while (IsDate1BeforeDate2(DateFrom, DateTo))
+	{
+		if (IsBusinessDay(DateFrom))
+			DaysCount++;
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+	return DaysCount;
+}
+
 
 #pragma endregion ProblemsFrom11to20
 
