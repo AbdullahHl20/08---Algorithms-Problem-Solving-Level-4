@@ -696,6 +696,20 @@ bool IsDate1AfterDate2(stDate Date1, stDate Date2)
 }
 
 
+enum enDateCompare { Before = -1, Equal = 0, After = 1 };
+enDateCompare CompareDates(stDate Date1, stDate Date2)
+{
+	if (IsDate1BeforeDate2(Date1, Date2))
+		return enDateCompare::Before;
+	if (IsDate1EqualDate2(Date1, Date2))
+		return enDateCompare::Equal;
+	if (IsDate1AfterDate2(Date1, Date2))
+		return enDateCompare::After;
+	//this is faster
+	return enDateCompare::After;
+}
+
+
 #pragma endregion ProblemsFrom11to20
 
 int main()
@@ -704,16 +718,16 @@ int main()
 
 
 	stDate date1 = ReadFullDate();
-	stDate date2 = GetSystemDate();
+	stDate date2 = ReadFullDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
-
+	cout << CompareDate(date1, date2);
 	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
 	//cout << GetDayName(Number);
 	//PrintAllMonth(year);
 	//GetDeitles(year, Month, Day);
 
-	cout << to_string(GetDifferenceInDays(date1, date2));
+	//cout << to_string(GetDifferenceInDays(date1, date2));
 	/*stDate Date1 = ReadFullDate();
 	if (IsLastDay(Date1))
 		cout << "\n Yes Is last day";
