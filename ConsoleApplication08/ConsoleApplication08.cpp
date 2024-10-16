@@ -793,6 +793,33 @@ bool isValitDate(stDate date)
 
 }
 
+bool IsValidDate2(stDate Date)
+{
+	if (Date.Day < 1 || Date.Day>31)
+		return false;
+	if (Date.Month < 1 || Date.Month>12)
+		return false;
+	if (Date.Month == 2)
+	{
+		if (IsLeapYear(Date.Year))
+		{
+			if (Date.Day > 29)
+				return false;
+		}
+		else
+		{
+			if (Date.Day > 28)
+				return false;
+		}
+	}
+	short DaysInMonth = NumberOfDaysInAMonth(Date.Month,
+		Date.Year);
+	if (Date.Day > DaysInMonth)
+		return false;
+	return true;
+}
+short ReadDay()
+
 #pragma endregion ProblemsFrom11to20
 
 int main()
@@ -804,7 +831,7 @@ int main()
 	stDate date2 = ReadFullDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
-	cout << isvaditedate(date2);
+	cout << isValitDate(date2);
 	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
 	//cout << GetDayName(Number);
 	//PrintAllMonth(year);
