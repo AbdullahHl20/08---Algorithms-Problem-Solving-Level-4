@@ -356,7 +356,8 @@ int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
 	}
 	while (IstDate1BeforeDate2(Date1, Date2))
 	{
-		Days++; Date1 = IncreaseDateByOneDay(Date1);
+		Days++;
+		Date1 = IncreaseDateByOneDay(Date1);
 	}
 	return IncludeEndDay ? ++Days * SawpFlagValue : Days * SawpFlagValue;
 }
@@ -771,6 +772,21 @@ int CountOverlapDays(stPeriod Period1, stPeriod Period2)
 	}
 	return OverlapDays;
 }
+
+bool iSValitDate(stDate date)
+{
+	short NumberofDays = NumberOfDaysInAMonth(date.Month, date.Year);
+
+	if (0 > date.Day || date.Day > NumberofDays)
+		return false;
+
+	if (date.Month > 12 || date.Month < 0)
+		return false;
+
+	return true;
+
+}
+
 #pragma endregion ProblemsFrom11to20
 
 int main()
@@ -778,11 +794,11 @@ int main()
 	std::cout << "Hello World!\n";
 
 
-	stPeriod date1 = ReadPeriod();
+	//stPeriod date1 = ReadPeriod();
 	stDate date2 = ReadFullDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
-	cout << PeriodLengthInDays(date1, date2);
+	cout << isvaditedate(date2);
 	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
 	//cout << GetDayName(Number);
 	//PrintAllMonth(year);
