@@ -740,10 +740,37 @@ bool PeriodLengthInDays(stPeriod Period, stDate date1)
 
 	return false;
 }
-bool isDateInPeriod(stDate Date, stPeriod Period) 
-{ 
-	return !(CompareDates(Date, Period.StartDate) == enDateCompare::Before || CompareDates(Date, Period.EndDate) == enDateCompare::After); }
+bool isDateInPeriod(stDate Date, stPeriod Period)
+{
+	return !(CompareDates(Date, Period.StartDate) == enDateCompare::Before || CompareDates(Date, Period.EndDate) == enDateCompare::After);
+}
 
+
+
+int CountOverlapDays(stPeriod Period1, stPeriod Period2)
+{
+	int Period1Length = PeriodLengthInDays(Period1, true);
+	int Period2Length = PeriodLengthInDays(Period2, true);
+	int OverlapDays = 0;
+	if (!IsOverlapPeriods(Period1, Period2)) return 0;
+	if (Period1Length < Period2Length)
+	{
+		while (IsDate1BeforeDate2(Period1.StartDate, Period1.EndDate))
+		{
+			if (isDateInPeriod(Period1.StartDate, Period2))
+				OverlapDays++; Period1.StartDate = IncreaseDateByOneDay(Period1.StartDate);
+		}
+	}
+	else {
+		while (IsDate1BeforeDate2(Period2.StartDate, Period2.EndDate))
+		{
+			if (isDateInPeriod(Period2.StartDate, Period1))
+				OverlapDays++;
+			Period2.StartDate = IncreaseDateByOneDay(Period2.StartDate);
+		}
+	}
+	return OverlapDays;
+}
 #pragma endregion ProblemsFrom11to20
 
 int main()
