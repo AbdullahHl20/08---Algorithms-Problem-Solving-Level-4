@@ -710,13 +710,39 @@ enDateCompare CompareDates(stDate Date1, stDate Date2)
 }
 
 struct stPeriod { stDate StartDate; stDate EndDate; };
+
+stPeriod ReadPeriod() {
+	stPeriod Period;
+	cout << "\nEnter Start Date:\n";
+	Period.StartDate = ReadFullDate();
+	cout << "\nEnter End Date:\n";
+	Period.EndDate = ReadFullDate();
+	return Period;
+}
+
 bool IsOverlapPeriods(stPeriod Period1, stPeriod Period2)
 {
 	if (CompareDates(Period2.EndDate, Period1.StartDate) == enDateCompare::Before || CompareDates(Period2.StartDate, Period1.EndDate) == enDateCompare::After)
 		return false;
-	else 
+	else
 		return true;
 }
+
+int PeriodLengthInDays(stPeriod Period, bool IncludeEndDate = false)
+{
+	return GetDifferenceInDays(Period.StartDate, Period.EndDate, IncludeEndDate);
+}
+
+bool PeriodLengthInDays(stPeriod Period, stDate date1)
+{
+	if (CompareDates(Period.StartDate, date1) == enDateCompare::Before && CompareDates(Period.EndDate, date1) == enDateCompare::After)
+		return true;
+
+	return false;
+}
+bool isDateInPeriod(stDate Date, stPeriod Period) 
+{ 
+	return !(CompareDates(Date, Period.StartDate) == enDateCompare::Before || CompareDates(Date, Period.EndDate) == enDateCompare::After); }
 
 #pragma endregion ProblemsFrom11to20
 
@@ -725,11 +751,11 @@ int main()
 	std::cout << "Hello World!\n";
 
 
-	stDate date1 = ReadFullDate();
+	stPeriod date1 = ReadPeriod();
 	stDate date2 = ReadFullDate();
 	//int Month = ReadMonth();
 	//int Day = ReadDay();
-	cout << CompareDates(date1, date2);
+	cout << PeriodLengthInDays(date1, date2);
 	//cout << to_string(NumberOfDaysFromTheBeginingOfTheYear(year, Month, Day));
 	//cout << GetDayName(Number);
 	//PrintAllMonth(year);
