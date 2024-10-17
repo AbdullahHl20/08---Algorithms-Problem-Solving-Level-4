@@ -784,7 +784,7 @@ bool isValitDate(stDate date)
 {
 	short NumberofDays = NumberOfDaysInAMonth(date.Month, date.Year);
 
-	if (0 > date.Day || date.Day > NumberofDays)
+	if (date.Day < 1 || date.Day > NumberofDays)
 		return false;
 
 	if (date.Month > 12 || date.Month < 0)
