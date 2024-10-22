@@ -865,7 +865,17 @@ string ReadStringDate(string Message)
 	getline(cin >> ws, DateString);
 	return DateString;
 }
-
+string ReplaceWordInString(string S1, string StringToReplace, string sRepalceTo)
+{
+	short pos = S1.find(StringToReplace);
+	while (pos != std::string::npos)
+	{
+		S1 = S1.replace(pos, StringToReplace.length(), sRepalceTo);
+		pos = S1.find(StringToReplace);
+		//find next    } 
+		return S1;
+	}
+}
 #pragma endregion ProblemsFrom11to20
 
 int main()
@@ -899,7 +909,7 @@ int main()
 			cout << "\nYes, Date1 is Less than Date2.";
 		else
 			cout << "\nNo, Date1 is NOT Less than Date2.";*/
-
+ cout <<	ReplaceWordInString("ahmad", "ahmad", "abd");
 	system("pause>0");
 	return 0;
 }
